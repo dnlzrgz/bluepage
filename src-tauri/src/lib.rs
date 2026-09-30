@@ -1,23 +1,41 @@
-use tauri_plugin_sql::{Migration, MigrationKind};
+mod commands;
+mod db;
+mod models;
+
+use tauri::Manager;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    let migrations = vec![Migration {
-        version: 1,
-        description: "create_initial_tables",
-        sql: include_str!("../migrations/001_create_initial_tables.sql"),
-        kind: MigrationKind::Up,
-    }];
-
     tauri::Builder::default()
         .plugin(tauri_plugin_window_state::Builder::new().build())
-        .plugin(
-            tauri_plugin_sql::Builder::new()
-                .add_migrations("sqlite:bluepage.db", migrations)
-                .build(),
-        )
         .plugin(tauri_plugin_opener::init())
-        // .invoke_handler()
+        .setup(|app| {
+            let handle = app.handle().clone();
+
+            tauri::async_runtime::spawn(async move {
+                let app_data_dir = handle
+                    .path()
+                    .app_data_dir()
+                    .expect("failed to resolve app data dir");
+
+                std::fs::create_dir_all(&app_data_dir).expect("failed to create app data dir");
+
+                let pool = db::connect(&app_data_dir)
+                    .await
+                    .expect("failed to connect to database");
+
+                db::migrate(&pool).await.expect("failed to run migrations");
+
+                handle.manage(pool);
+                println!("Database initialized");
+            });
+
+            Ok(())
+        })
+        .invoke_handler(tauri::generate_handler![
+            commands::get_entry,
+            commands::save_entry,
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
