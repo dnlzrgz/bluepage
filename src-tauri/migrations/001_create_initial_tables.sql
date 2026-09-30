@@ -5,8 +5,8 @@ CREATE TABLE IF NOT EXISTS entries (
     content     TEXT NOT NULL DEFAULT '',   -- TipTap JSON (serialized)
     plain_text  TEXT NOT NULL DEFAULT '',   -- Extracted plain text for FTS
 
-    created_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
-    updated_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
+    created_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%f', 'now')),
+    updated_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%f', 'now'))
 );
 
 -- FTS5 virtual table for full-text search

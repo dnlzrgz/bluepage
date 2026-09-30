@@ -1,10 +1,14 @@
+use chrono::NaiveDate;
 use sqlx::SqlitePool;
 use tauri::State;
 
 use crate::models::Entry;
 
 #[tauri::command]
-pub async fn get_entry(date: String, pool: State<'_, SqlitePool>) -> Result<Option<Entry>, String> {
+pub async fn get_entry(
+    date: NaiveDate,
+    pool: State<'_, SqlitePool>,
+) -> Result<Option<Entry>, String> {
     sqlx::query_as::<_, Entry>("SELECT * FROM entries WHERE date = ?")
         .bind(date)
         .fetch_optional(&*pool)
