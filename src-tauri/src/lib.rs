@@ -33,8 +33,8 @@ pub fn run() {
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
-            commands::get_entry,
-            commands::save_entry,
+            commands::load_entry,
+            commands::upsert_entry,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

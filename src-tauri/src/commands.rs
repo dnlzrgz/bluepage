@@ -5,7 +5,7 @@ use tauri::State;
 use crate::models::Entry;
 
 #[tauri::command]
-pub async fn get_entry(
+pub async fn load_entry(
     date: NaiveDate,
     pool: State<'_, SqlitePool>,
 ) -> Result<Option<Entry>, String> {
@@ -17,8 +17,8 @@ pub async fn get_entry(
 }
 
 #[tauri::command]
-pub async fn save_entry(
-    date: String,
+pub async fn upsert_entry(
+    date: NaiveDate,
     content: String,
     plain_text: String,
     pool: State<'_, SqlitePool>,

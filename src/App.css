@@ -1,1 +1,37 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@import "@fontsource-variable/geist";
+
+@theme {
+  --color-primary: #2e759e;
+  --color-white: #eff6fa;
+  --color-black: #050c10;
+}
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: "Geist Variable", sans-serif;
+}
+
+@layer base {
+  #root {
+    isolation: isolate;
+  }
+
+  html {
+    @apply bg-primary;
+    @apply font-sans;
+  }
+
+  body {
+    position: relative;
+  }
+}
+
+input[type="date"]::-webkit-datetime-edit-day-field:focus,
+input[type="date"]::-webkit-datetime-edit-month-field:focus,
+input[type="date"]::-webkit-datetime-edit-year-field:focus {
+  background: transparent;
+  color: inherit;
+  outline: none;
+}
