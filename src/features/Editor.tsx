@@ -6,17 +6,33 @@ import { useEffect } from "react";
 import { loadEntry, upsertEntry } from "@/lib/db";
 import { track } from "@/stores/status";
 
+const EDITOR_CLASS = [
+  "prose prose-lg",
+  "mx-auto w-full max-w-255",
+  "px-6 pt-12 pb-[50dvh]",
+  "antialiased hyphens-auto wrap-break-word",
+  "bg-primary focus:outline-none",
+].join(" ");
+
 const Editor = () => {
   const isoDate = toISODate(useDate());
 
   const editor = useEditor(
     {
-      extensions: [StarterKit],
+      extensions: [
+        StarterKit.configure({
+          codeBlock: false,
+          horizontalRule: false,
+          dropcursor: false,
+          gapcursor: false,
+        }),
+      ],
       editorProps: {
         attributes: {
-          class:
-            "mx-auto mt-12 w-full max-w-255 min-h-[50vh] px-12 py-8 bg-primary prose prose-neutral prose-lg text-white antialiased prose-p:font-light prose-li:font-light focus:outline-none",
+          class: EDITOR_CLASS,
         },
+        scrollThreshold: { top: 0, bottom: 200, left: 0, right: 0 },
+        scrollMargin: { top: 0, bottom: 200, left: 0, right: 0 },
       },
       onUpdate: ({ editor }) => {
         void track(upsertEntry(isoDate, JSON.stringify(editor.getJSON()), editor.getText()));

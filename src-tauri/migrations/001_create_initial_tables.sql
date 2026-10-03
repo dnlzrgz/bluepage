@@ -22,7 +22,7 @@ CREATE TRIGGER IF NOT EXISTS entries_touch
 AFTER UPDATE OF content, plain_text ON entries
 BEGIN
     UPDATE entries
-    SET updated_at = strftime('%Y-%m-%dT%H:%M:%fZ', 'now')
+    SET updated_at = strftime('%Y-%m-%dT%H:%M:%f', 'now')
     WHERE id = new.id;
 END;
 

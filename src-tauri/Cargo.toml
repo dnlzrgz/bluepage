@@ -1,9 +1,12 @@
 [package]
 name = "bluepage"
-version = "0.1.1"
-description = "A Tauri App"
-authors = ["you"]
+version = "0.1.2"
+description = "A journal application"
+authors = ["dnlzrgz <contact@dnlzrgz.com>"]
 edition = "2021"
+license = "MIT"
+readme = "README.md"
+publish = false
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
