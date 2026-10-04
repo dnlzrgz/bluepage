@@ -1,10 +1,19 @@
-import { useEditor, EditorContent } from "@tiptap/react";
+import { useEditor, EditorContent, JSONContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { useDate } from "@/stores/journal";
 import { toISODate } from "@/lib/date";
 import { useEffect } from "react";
 import { loadEntry, upsertEntry } from "@/lib/db";
 import { track } from "@/stores/status";
+
+function parseContent(raw: string): JSONContent | "" {
+  try {
+    return JSON.parse(raw) as JSONContent;
+  } catch (error) {
+    console.error("Failed to parse entry content", error);
+    return "";
+  }
+}
 
 const EDITOR_CLASS = [
   "prose prose-lg",
@@ -45,12 +54,23 @@ const Editor = () => {
     if (!editor) return;
     let cancelled = false;
 
-    loadEntry(isoDate).then((entry) => {
+    editor.setEditable(false, false);
+
+    const load = async () => {
+      let content: string | JSONContent = "";
+      try {
+        const entry = await track(loadEntry(isoDate));
+        if (entry) content = parseContent(entry.content);
+      } catch (error) {
+        console.error("Failed to load entry", error);
+      }
+
       if (cancelled) return;
-      editor.commands.setContent(entry ? JSON.parse(entry.content) : "", {
-        emitUpdate: false,
-      });
-    });
+      editor.commands.setContent(content, { emitUpdate: false });
+      editor.setEditable(true, false);
+    };
+
+    void load();
 
     return () => {
       cancelled = true;

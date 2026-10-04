@@ -1,7 +1,8 @@
 import { useStatusStore } from "@/stores/status";
 
 export function StatusIndicator() {
-  const busy = useStatusStore((s) => s.busy);
+  const pending = useStatusStore((s) => s.pending);
+  const busy = pending > 0;
 
   return (
     <span

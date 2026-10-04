@@ -1,16 +1,22 @@
 import { create } from "zustand";
 
-export const useStatusStore = create<{ busy: boolean }>(() => ({
-  busy: false,
+export const useStatusStore = create<{ pending: number }>(() => ({
+  pending: 0,
 }));
 
 const SHOW_DELAY_MS = 150;
 
 export function track<T>(op: Promise<T>): Promise<T> {
-  const timer = window.setTimeout(() => useStatusStore.setState({ busy: true }), SHOW_DELAY_MS);
+  let shown = false;
+  const timer = window.setTimeout(() => {
+    shown = true;
+    useStatusStore.setState((s) => ({ pending: s.pending + 1 }));
+  }, SHOW_DELAY_MS);
 
   return op.finally(() => {
     window.clearTimeout(timer);
-    useStatusStore.setState({ busy: false });
+    if (shown) {
+      useStatusStore.setState((s) => ({ pending: Math.max(0, s.pending - 1) }));
+    }
   });
 }
