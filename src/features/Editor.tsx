@@ -1,10 +1,9 @@
+import { useEffect } from "react";
 import { useEditor, EditorContent, JSONContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useDate } from "@/stores/journal";
-import { toISODate } from "@/lib/date";
-import { useEffect } from "react";
-import { loadEntry, upsertEntry } from "@/lib/db";
+import { useEffectiveDate, toISODate } from "@/stores/journal";
 import { track } from "@/stores/status";
+import { loadEntry, upsertEntry } from "@/lib/db";
 
 function parseContent(raw: string): JSONContent | "" {
   try {
@@ -24,7 +23,7 @@ const EDITOR_CLASS = [
 ].join(" ");
 
 const Editor = () => {
-  const isoDate = toISODate(useDate());
+  const isoDate = toISODate(useEffectiveDate());
 
   const editor = useEditor(
     {
@@ -44,7 +43,13 @@ const Editor = () => {
         scrollMargin: { top: 0, bottom: 200, left: 0, right: 0 },
       },
       onUpdate: ({ editor }) => {
-        void track(upsertEntry(isoDate, JSON.stringify(editor.getJSON()), editor.getText()));
+        track(
+          upsertEntry(
+            isoDate,
+            JSON.stringify(editor.getJSON()),
+            editor.getText(),
+          ),
+        ).catch((error) => console.error("Failed to save entry", error));
       },
     },
     [isoDate],

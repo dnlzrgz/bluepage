@@ -6,7 +6,7 @@ export const useStatusStore = create<{ pending: number }>(() => ({
 
 const SHOW_DELAY_MS = 150;
 
-export function track<T>(op: Promise<T>): Promise<T> {
+export async function track<T>(op: Promise<T>): Promise<T> {
   let shown = false;
   const timer = window.setTimeout(() => {
     shown = true;
