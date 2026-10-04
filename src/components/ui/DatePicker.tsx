@@ -9,12 +9,13 @@ export function DatePicker() {
   return (
     <input
       type="date"
+      aria-label="Entry date"
       value={toISODate(date)}
       onChange={(e) => {
         if (!e.target.value) return;
         setDate(parseDate(e.target.value));
       }}
-      className="cursor-pointer bg-transparent px-3 py-1.5 text-white select-none"
+      className="w-fit cursor-pointer border-none bg-transparent px-3 py-1.5 text-white select-none"
     />
   );
 }

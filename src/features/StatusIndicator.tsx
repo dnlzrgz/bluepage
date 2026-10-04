@@ -5,9 +5,14 @@ export function StatusIndicator() {
 
   return (
     <span
+      aria-hidden
       className={`block h-2.5 w-2.5 rounded-full bg-white transition-opacity ${
-        busy ? "animate-pulse opacity-150" : "opacity-0"
+        busy ? "opacity-100 motion-safe:animate-pulse" : "opacity-0"
       }`}
-    ></span>
+    >
+      <span role="status" className="sr-only">
+        {busy ? "Saving" : ""}
+      </span>
+    </span>
   );
 }
