@@ -2,14 +2,65 @@
 @import "@daypicker/react/style.css" layer(components);
 @plugin "@tailwindcss/typography";
 
+:root {
+  --blue-primary: #2e759e;
+  --blue-error: #b24c63;
+  --blue-success: #06a77d;
+  --blue-white: #eff6fa;
+  --blue-black: #050c10;
+
+  --forest-primary: #3f7d5a;
+  --forest-error: #d64933;
+  --forest-success: #449dd1;
+  --forest-white: #f1f8f4;
+  --forest-black: #0e1b14;
+
+  --plum-primary: #7a4a8a;
+  --plum-error: #fe5e41;
+  --plum-success: #00a878;
+  --plum-white: #f6f2f8;
+  --plum-black: #170e1b;
+}
+
 @theme {
-  --color-primary: #2e759e;
-  --color-white: #eff6fa;
-  --color-black: #050c10;
+  --color-primary: var(--blue-primary);
+  --color-error: var(--blue-error);
+  --color-success: var(--blue-success);
+  --color-white: var(--blue-white);
+  --color-black: var(--blue-black);
+
+  --color-surface: var(--color-primary);
+  --color-ink: var(--color-white);
+}
+
+[data-theme="blue"] {
+  --color-primary: var(--blue-primary);
+  --color-error: var(--blue-error);
+  --color-success: var(--blue-success);
+  --color-white: var(--blue-white);
+  --color-black: var(--blue-black);
+}
+
+[data-theme="forest"] {
+  --color-primary: var(--forest-primary);
+  --color-error: var(--forest-error);
+  --color-success: var(--forest-success);
+  --color-white: var(--forest-white);
+  --color-black: var(--forest-black);
+}
+
+[data-theme="plum"] {
+  --color-primary: var(--plum-primary);
+  --color-error: var(--plum-error);
+  --color-success: var(--plum-success);
+  --color-white: var(--plum-white);
+  --color-black: var(--plum-black);
 }
 
 @theme inline {
   --font-heading: var(--font-sans);
+  --color-foreground: var(--color-ink);
+  --color-background: var(--color-surface);
 }
 
 @layer base {
@@ -18,7 +69,7 @@
   }
 
   html {
-    @apply bg-primary font-sans;
+    @apply bg-background font-sans;
   }
 
   body {
@@ -27,22 +78,22 @@
 }
 
 @utility prose {
-  --tw-prose-body: var(--color-white);
-  --tw-prose-headings: var(--color-white);
-  --tw-prose-lead: var(--color-white);
-  --tw-prose-links: var(--color-white);
-  --tw-prose-bold: var(--color-white);
-  --tw-prose-counters: var(--color-white);
-  --tw-prose-bullets: var(--color-white);
-  --tw-prose-hr: var(--color-white);
-  --tw-prose-quotes: var(--color-white);
-  --tw-prose-quote-borders: var(--color-white);
-  --tw-prose-captions: var(--color-white);
-  --tw-prose-code: var(--color-white);
-  --tw-prose-pre-code: var(--color-white);
-  --tw-prose-pre-bg: var(--color-black);
-  --tw-prose-th-borders: var(--color-white);
-  --tw-prose-td-borders: var(--color-white);
+  --tw-prose-body: var(--color-foreground);
+  --tw-prose-headings: var(--color-foreground);
+  --tw-prose-lead: var(--color-foreground);
+  --tw-prose-links: var(--color-foreground);
+  --tw-prose-bold: var(--color-foreground);
+  --tw-prose-counters: var(--color-foreground);
+  --tw-prose-bullets: var(--color-foreground);
+  --tw-prose-hr: var(--color-foreground);
+  --tw-prose-quotes: var(--color-foreground);
+  --tw-prose-quote-borders: var(--color-foreground);
+  --tw-prose-captions: var(--color-foreground);
+  --tw-prose-code: var(--color-foreground);
+  --tw-prose-pre-code: var(--color-foreground);
+  --tw-prose-pre-bg: var(--color-background);
+  --tw-prose-th-borders: var(--color-foreground);
+  --tw-prose-td-borders: var(--color-foreground);
 }
 
 @utility bg-noise {

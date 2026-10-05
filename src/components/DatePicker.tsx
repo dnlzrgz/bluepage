@@ -15,7 +15,7 @@ export function DatePicker() {
 
   return (
     <Popover.Root>
-      <Popover.Trigger className="cursor-pointer px-3 py-1.5 text-lg text-white">
+      <Popover.Trigger className="cursor-pointer text-lg text-ink">
         {toISODate(date)}
       </Popover.Trigger>
 
@@ -29,9 +29,10 @@ export function DatePicker() {
               selected={toJsDate(date)}
               onSelect={(d) => d && setDate(fromJsDate(d))}
               classNames={{
-                month_caption: `${defaultClassNames.month_caption} font-normal`,
+                month_caption: `${defaultClassNames.month_caption} text-black font-normal`,
+                weekday: `${defaultClassNames.weekday} text-black font-bold`,
                 chevron: `${defaultClassNames.chevron} fill-black hover:fill-primary`,
-                selected: `${defaultClassNames.selected} [&>button]:bg-primary [&>button]:text-white`,
+                selected: `${defaultClassNames.selected} [&>button]:bg-primary [&>button]:text-ink`,
               }}
             />
           </Popover.Popup>

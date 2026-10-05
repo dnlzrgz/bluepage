@@ -7,7 +7,7 @@ export function StatusIndicator() {
   return (
     <span
       aria-hidden
-      className={`block h-2.5 w-2.5 rounded-full bg-white transition-opacity ${
+      className={`block h-3 w-3 rounded-full bg-foreground p-1 transition-opacity ${
         busy ? "opacity-100 motion-safe:animate-pulse" : "opacity-0"
       }`}
     >

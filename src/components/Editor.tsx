@@ -20,30 +20,26 @@ const EDITOR_PROPS = {
       "mx-auto w-full max-w-255",
       "px-6 pt-12 mt-6 pb-[50dvh]",
       "antialiased hyphens-auto wrap-break-word",
-      "bg-primary focus:outline-none",
+      "bg-background focus:outline-none",
     ].join(" "),
   },
   scrollThreshold: { top: 0, bottom: 200, left: 0, right: 0 },
   scrollMargin: { top: 0, bottom: 200, left: 0, right: 0 },
 };
 
-export default function Editor() {
+export function Editor() {
   const isoDate = toISODate(useEffectiveDate());
 
-  const editor = useEditor(
-    { extensions: EXTENSIONS, editable: false, editorProps: EDITOR_PROPS },
-    [isoDate],
-  );
+  const editor = useEditor({ extensions: EXTENSIONS, editable: false, editorProps: EDITOR_PROPS }, [
+    isoDate,
+  ]);
 
   const loadFailed = useLoadEntry(editor, isoDate);
   useAutosave(editor, isoDate);
 
   if (loadFailed) {
     return (
-      <p
-        role="alert"
-        className="mx-auto max-w-255 px-6 pt-12 text-lg text-white"
-      >
+      <p role="alert" className="mx-auto max-w-255 px-6 pt-12 text-lg text-ink">
         Something went wrong :(
       </p>
     );
