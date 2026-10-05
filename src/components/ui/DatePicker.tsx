@@ -15,7 +15,7 @@ export function DatePicker() {
 
   return (
     <Popover.Root>
-      <Popover.Trigger className="cursor-pointer px-3 py-1.5 text-white">
+      <Popover.Trigger className="cursor-pointer px-3 py-1.5 text-lg text-white">
         {toISODate(date)}
       </Popover.Trigger>
 
@@ -29,7 +29,7 @@ export function DatePicker() {
               selected={toJsDate(date)}
               onSelect={(d) => d && setDate(fromJsDate(d))}
               classNames={{
-                month_caption: `${defaultClassNames.month_caption} text-lg font-normal`,
+                month_caption: `${defaultClassNames.month_caption} font-normal`,
                 chevron: `${defaultClassNames.chevron} fill-black hover:fill-primary`,
                 selected: `${defaultClassNames.selected} [&>button]:bg-primary [&>button]:text-white`,
               }}

@@ -18,7 +18,7 @@ const EDITOR_PROPS = {
     class: [
       "prose prose-lg",
       "mx-auto w-full max-w-255",
-      "px-6 pt-12 mt-12 pb-[50dvh]",
+      "px-6 pt-12 mt-6 pb-[50dvh]",
       "antialiased hyphens-auto wrap-break-word",
       "bg-primary focus:outline-none",
     ].join(" "),
@@ -30,16 +30,20 @@ const EDITOR_PROPS = {
 export default function Editor() {
   const isoDate = toISODate(useEffectiveDate());
 
-  const editor = useEditor({ extensions: EXTENSIONS, editable: false, editorProps: EDITOR_PROPS }, [
-    isoDate,
-  ]);
+  const editor = useEditor(
+    { extensions: EXTENSIONS, editable: false, editorProps: EDITOR_PROPS },
+    [isoDate],
+  );
 
   const loadFailed = useLoadEntry(editor, isoDate);
   useAutosave(editor, isoDate);
 
   if (loadFailed) {
     return (
-      <p role="alert" className="mx-auto max-w-255 px-6 pt-12 text-white">
+      <p
+        role="alert"
+        className="mx-auto max-w-255 px-6 pt-12 text-lg text-white"
+      >
         Something went wrong :(
       </p>
     );
