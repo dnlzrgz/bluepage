@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "@daypicker/react/style.css" layer(components);
 @plugin "@tailwindcss/typography";
 @import "@fontsource-variable/geist";
 
@@ -57,4 +58,8 @@ input[type="date"]::-webkit-datetime-edit-year-field:focus {
   background: transparent;
   color: inherit;
   outline: none;
+}
+
+.rdp-root {
+  --rdp-accent-color: var(--color-primary);
 }

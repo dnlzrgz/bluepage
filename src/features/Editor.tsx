@@ -18,7 +18,7 @@ const EDITOR_PROPS = {
     class: [
       "prose prose-lg",
       "mx-auto w-full max-w-255",
-      "px-6 pt-12 pb-[50dvh]",
+      "px-6 pt-12 mt-12 pb-[50dvh]",
       "antialiased hyphens-auto wrap-break-word",
       "bg-primary focus:outline-none",
     ].join(" "),
