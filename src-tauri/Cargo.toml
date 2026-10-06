@@ -1,6 +1,6 @@
 [package]
 name = "bluepage"
-version = "0.2.0"
+version = "0.2.1"
 description = "A journal application"
 authors = ["dnlzrgz <contact@dnlzrgz.com>"]
 edition = "2021"

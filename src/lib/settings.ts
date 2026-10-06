@@ -1,7 +1,7 @@
 import { LazyStore } from "@tauri-apps/plugin-store";
 import { create } from "zustand";
 
-export const THEMES = ["blue", "forest", "plum"] as const;
+export const THEMES = ["blue", "forest", "plum", "paper"] as const;
 export type Theme = (typeof THEMES)[number];
 
 interface Settings {

@@ -7,15 +7,19 @@ import { SettingsPopover } from "./components/SettingsPopover";
 
 function App() {
   return (
-    <main className="font-sans">
-      <FloatingToolbar>
-        <StatusIndicator />
-        <DatePicker />
-        <SettingsPopover />
-      </FloatingToolbar>
-      <Editor />
-      <NoiseBackground enabled />
-    </main>
+    <>
+      <header>
+        <FloatingToolbar>
+          <StatusIndicator />
+          <DatePicker />
+          <SettingsPopover />
+        </FloatingToolbar>
+      </header>
+      <main>
+        <Editor />
+        <NoiseBackground enabled />
+      </main>
+    </>
   );
 }
 

@@ -16,7 +16,7 @@ export function SettingsPopover() {
 
       <Popover.Portal>
         <Popover.Positioner sideOffset={6} align="end" className="z-40">
-          <Popover.Popup className="flex w-72 flex-col gap-6 rounded-xl bg-white p-3 shadow-xl backdrop-blur-2xl">
+          <Popover.Popup className="flex w-72 flex-col gap-6 rounded-xl bg-white p-3 shadow-xl">
             <ThemeSelector />
           </Popover.Popup>
         </Popover.Positioner>

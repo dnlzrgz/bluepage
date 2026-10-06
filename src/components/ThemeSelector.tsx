@@ -20,8 +20,8 @@ export function ThemeSelector() {
         <label key={t} className="cursor-pointer">
           <Radio.Root
             value={t}
-            className="flex h-5 w-5 items-center justify-center rounded-full transition-transform hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary data-checked:ring-2 data-checked:ring-primary/90 data-checked:ring-offset-2 data-checked:ring-offset-foreground"
-            style={{ backgroundColor: `var(--${t}-primary)` }}
+            data-theme={t}
+            className="data-checked:ring-offset-none flex h-5 w-5 items-center justify-center rounded-full bg-primary transition-transform hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary data-checked:ring-2 data-checked:ring-primary data-checked:ring-offset-2"
           ></Radio.Root>
           <span className="sr-only">{t} theme</span>
         </label>
