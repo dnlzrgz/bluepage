@@ -1,18 +1,19 @@
 import { create } from "zustand";
-import { CalendarDate, getLocalTimeZone, today } from "@internationalized/date";
+
+export const toISODate = (d: Date) =>
+  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+
+export const fromISODate = (iso: string) => new Date(`${iso}T00:00:00`);
 
 interface JournalState {
-  selectedDate: CalendarDate | null;
-  setSelectedDate: (date: CalendarDate) => void;
+  selectedDate: string | null;
+  setSelectedDate: (iso: string) => void;
 }
 
 export const useJournalStore = create<JournalState>()((set) => ({
   selectedDate: null,
-  setSelectedDate: (date) => set({ selectedDate: date }),
+  setSelectedDate: (selectedDate) => set({ selectedDate }),
 }));
 
-export const useEffectiveDate = () => useJournalStore((s) => s.selectedDate) ?? useToday();
-
-export const useToday = () => today(getLocalTimeZone());
-
-export const toISODate = (date: CalendarDate) => date.toString();
+export const useEffectiveDate = () =>
+  useJournalStore((s) => s.selectedDate) ?? toISODate(new Date());

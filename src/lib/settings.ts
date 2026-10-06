@@ -1,7 +1,7 @@
 import { LazyStore } from "@tauri-apps/plugin-store";
 import { create } from "zustand";
 
-export const THEMES = ["blue", "forest", "plum", "paper"] as const;
+export const THEMES = ["blue", "forest", "plum", "clay", "paper"] as const;
 export type Theme = (typeof THEMES)[number];
 
 interface Settings {
@@ -19,7 +19,7 @@ function applySettings({ theme, font }: Settings) {
   root.dataset.theme = theme;
 
   if (font) {
-    root.style.setProperty("--app-font", font);
+    root.style.setProperty("--app-font", JSON.stringify(font));
   } else {
     root.style.removeProperty("--app-font");
   }

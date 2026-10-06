@@ -13,7 +13,7 @@ export function ThemeSelector() {
           updateSetting("theme", value as Theme);
         }
       }}
-      aria-labelledby="theme-label"
+      aria-label="Theme"
       className="flex items-center justify-center gap-2.5"
     >
       {THEMES.map((t) => (
@@ -23,7 +23,7 @@ export function ThemeSelector() {
             data-theme={t}
             className="data-checked:ring-offset-none flex h-5 w-5 items-center justify-center rounded-full bg-primary transition-transform hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary data-checked:ring-2 data-checked:ring-primary data-checked:ring-offset-2"
           ></Radio.Root>
-          <span className="sr-only">{t} theme</span>
+          <span className="sr-only">{t}</span>
         </label>
       ))}
     </RadioGroup>

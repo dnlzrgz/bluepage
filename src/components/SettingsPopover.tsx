@@ -1,5 +1,6 @@
 import { ThemeSelector } from "@/components/ThemeSelector";
 import { Popover } from "@base-ui/react/popover";
+import { FontSelector } from "./FontSelector";
 
 export function SettingsPopover() {
   return (
@@ -16,8 +17,9 @@ export function SettingsPopover() {
 
       <Popover.Portal>
         <Popover.Positioner sideOffset={6} align="end" className="z-40">
-          <Popover.Popup className="flex w-72 flex-col gap-6 rounded-xl bg-white p-3 shadow-xl">
+          <Popover.Popup className="flex w-72 flex-col gap-6 rounded-xl bg-white px-3.5 py-6 shadow-xl">
             <ThemeSelector />
+            <FontSelector />
           </Popover.Popup>
         </Popover.Positioner>
       </Popover.Portal>

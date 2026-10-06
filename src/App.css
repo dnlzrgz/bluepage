@@ -19,41 +19,41 @@
 [data-theme="blue"] {
   --primary: #2e759e;
   --background: var(--primary);
-  --foreground: #eff6fa;
+  --foreground: #fffffe;
   --popover: var(--foreground);
-  --popover-foreground: #050c10;
-  --error: #b24c63;
-  --success: #06a77d;
+  --popover-foreground: var(--primary);
 }
 
 [data-theme="forest"] {
-  --primary: #3f7d5a;
+  --primary: #004643;
   --background: var(--primary);
-  --foreground: #f1f8f4;
+  --foreground: #fffffe;
   --popover: var(--foreground);
-  --popover-foreground: #070e0a;
-  --error: #c14953;
-  --success: #6096ba;
+  --popover-foreground: var(--primary);
 }
 
 [data-theme="plum"] {
-  --primary: #7a4a8a;
+  --primary: #6246ea;
   --background: var(--primary);
-  --foreground: #f6f2f8;
+  --foreground: #fffffe;
   --popover: var(--foreground);
-  --popover-foreground: #170e1b;
-  --error: #fe5e41;
-  --success: #00a878;
+  --popover-foreground: var(--primary);
+}
+
+[data-theme="clay"] {
+  --primary: #55423d;
+  --background: var(--primary);
+  --foreground: #fffffe;
+  --popover: var(--foreground);
+  --popover-foreground: var(--primary);
 }
 
 [data-theme="paper"] {
-  --primary: #30343f;
-  --background: #fff;
+  --primary: #0d0d0d;
+  --background: #fffffe;
   --foreground: var(--primary);
   --popover: var(--background);
   --popover-foreground: var(--primary);
-  --error: #b10f2e;
-  --success: #629460;
 }
 
 @layer base {

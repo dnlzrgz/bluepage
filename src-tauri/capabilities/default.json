@@ -7,7 +7,8 @@
     "core:default",
     "core:window:allow-destroy",
     "opener:default",
-    "window-state:default",
-    "store:default"
+    "store:default",
+    "system-fonts:default",
+    "window-state:default"
   ]
 }

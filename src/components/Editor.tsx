@@ -1,6 +1,6 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useEffectiveDate, toISODate } from "@/stores/journal";
+import { useEffectiveDate } from "@/stores/journal";
 import { useLoadEntry } from "@/hooks/useLoadEntry";
 import { useAutosave } from "@/hooks/useAutosave";
 
@@ -28,7 +28,7 @@ const EDITOR_PROPS = {
 };
 
 export function Editor() {
-  const isoDate = toISODate(useEffectiveDate());
+  const isoDate = useEffectiveDate();
 
   const editor = useEditor({ extensions: EXTENSIONS, editable: false, editorProps: EDITOR_PROPS }, [
     isoDate,
