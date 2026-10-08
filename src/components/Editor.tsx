@@ -15,6 +15,8 @@ const EXTENSIONS = [
 
 const EDITOR_PROPS = {
   attributes: {
+    spellcheck: "true",
+    lang: navigator.language,
     class: [
       "prose prose-lg",
       "mx-auto w-full max-w-255",
@@ -30,16 +32,20 @@ const EDITOR_PROPS = {
 export function Editor() {
   const isoDate = useEffectiveDate();
 
-  const editor = useEditor({ extensions: EXTENSIONS, editable: false, editorProps: EDITOR_PROPS }, [
-    isoDate,
-  ]);
+  const editor = useEditor(
+    { extensions: EXTENSIONS, editable: false, editorProps: EDITOR_PROPS },
+    [isoDate],
+  );
 
   const loadFailed = useLoadEntry(editor, isoDate);
   useAutosave(editor, isoDate);
 
   if (loadFailed) {
     return (
-      <p role="alert" className="mx-auto max-w-255 px-6 pt-12 text-lg text-foreground">
+      <p
+        role="alert"
+        className="mx-auto max-w-255 px-6 pt-12 text-lg text-foreground"
+      >
         Something went wrong :(
       </p>
     );

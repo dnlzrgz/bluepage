@@ -3,9 +3,11 @@ name = "bluepage"
 version = "0.2.4"
 description = "A journal application"
 authors = ["dnlzrgz <contact@dnlzrgz.com>"]
+repository = "https://github.com/dnlzrgz/bluepage"
 edition = "2021"
 license = "MIT"
 readme = "README.md"
+
 publish = false
 
 [lib]
