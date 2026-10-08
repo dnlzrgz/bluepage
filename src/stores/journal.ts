@@ -5,6 +5,15 @@ export const toISODate = (d: Date) =>
 
 export const fromISODate = (iso: string) => new Date(`${iso}T00:00:00`);
 
+export const monthRange = (d: Date) => {
+  const y = d.getFullYear();
+  const m = d.getMonth();
+  return {
+    start: toISODate(new Date(y, m, 1)),
+    end: toISODate(new Date(y, m + 1, 0)),
+  };
+};
+
 interface JournalState {
   selectedDate: string | null;
   setSelectedDate: (iso: string) => void;

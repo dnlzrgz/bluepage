@@ -5,7 +5,7 @@ use tauri::State;
 use crate::models::Entry;
 
 #[tauri::command]
-pub async fn load_entry(
+pub async fn get_entry(
     date: NaiveDate,
     pool: State<'_, SqlitePool>,
 ) -> Result<Option<Entry>, String> {
@@ -14,6 +14,24 @@ pub async fn load_entry(
         .fetch_optional(&*pool)
         .await
         .map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+pub async fn get_entry_dates(
+    start_date: NaiveDate,
+    end_date: NaiveDate,
+    pool: State<'_, SqlitePool>,
+) -> Result<Vec<NaiveDate>, String> {
+    sqlx::query_scalar::<_, NaiveDate>(
+        "SELECT date FROM entries
+         WHERE date BETWEEN ? AND ?
+         ORDER BY date",
+    )
+    .bind(start_date)
+    .bind(end_date)
+    .fetch_all(&*pool)
+    .await
+    .map_err(|e| e.to_string())
 }
 
 #[tauri::command]

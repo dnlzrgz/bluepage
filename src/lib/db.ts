@@ -9,8 +9,17 @@ export interface Entry {
   updated_at: string;
 }
 
-export async function loadEntry(date: string): Promise<Entry | null> {
-  return invoke<Entry | null>("load_entry", { date });
+export async function getEntry(date: string): Promise<Entry | null> {
+  return invoke<Entry | null>("get_entry", { date });
+}
+
+export async function getEntryDates(startDate: string, endDate: string): Promise<Set<string>> {
+  const dates = await invoke<string[]>("get_entry_dates", {
+    startDate,
+    endDate,
+  });
+
+  return new Set(dates);
 }
 
 export async function upsertEntry(date: string, content: string, plainText: string): Promise<void> {

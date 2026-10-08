@@ -31,7 +31,8 @@ pub fn run() {
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
-            commands::load_entry,
+            commands::get_entry,
+            commands::get_entry_dates,
             commands::upsert_entry,
         ])
         .run(tauri::generate_context!())
