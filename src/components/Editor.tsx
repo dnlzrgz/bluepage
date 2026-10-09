@@ -36,16 +36,8 @@ export function Editor() {
     isoDate,
   ]);
 
-  const loadFailed = useLoadEntry(editor, isoDate);
+  useLoadEntry(editor, isoDate);
   useAutosave(editor, isoDate);
-
-  if (loadFailed) {
-    return (
-      <p role="alert" className="mx-auto max-w-255 px-6 pt-12 text-lg text-foreground">
-        Something went wrong :(
-      </p>
-    );
-  }
 
   return <EditorContent editor={editor} />;
 }

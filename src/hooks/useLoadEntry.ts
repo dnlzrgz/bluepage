@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import type { Editor } from "@tiptap/react";
 import { getEntry } from "@/lib/db";
 import { track } from "@/stores/status";
 
-export function useLoadEntry(editor: Editor | null, isoDate: string): boolean {
-  const [failedDate, setFailedDate] = useState<string | null>(null);
-
+export function useLoadEntry(editor: Editor | null, isoDate: string): void {
   useEffect(() => {
     if (!editor) return;
     let cancelled = false;
@@ -26,7 +24,6 @@ export function useLoadEntry(editor: Editor | null, isoDate: string): boolean {
         editor.setEditable(true, false);
       } catch (error) {
         console.error("Failed to load entry", isoDate, error);
-        if (!cancelled) setFailedDate(isoDate);
       }
     })();
 
@@ -34,6 +31,4 @@ export function useLoadEntry(editor: Editor | null, isoDate: string): boolean {
       cancelled = true;
     };
   }, [editor, isoDate]);
-
-  return failedDate === isoDate;
 }

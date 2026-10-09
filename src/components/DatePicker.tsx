@@ -1,4 +1,5 @@
 import { getEntryDates } from "@/lib/db";
+import { track } from "@/stores/status";
 import {
   fromISODate,
   monthRange,
@@ -22,7 +23,7 @@ export function DatePicker() {
     if (!open) return;
     let active = true;
     const { start, end } = monthRange(month);
-    getEntryDates(start, end)
+    track(getEntryDates(start, end))
       .then((dates) => active && setEntryDates(dates))
       .catch(console.error);
 
@@ -54,11 +55,15 @@ export function DatePicker() {
                   "[&>button]:relative [&>button]:after:absolute [&>button]:after:bottom-0.5 [&>button]:after:left-1/2 [&>button]:after:size-1.25 [&>button]:after:-translate-x-1/2 [&>button]:after:rounded-full [&>button]:after:bg-primary aria-selected:[&>button]:after:bg-popover",
               }}
               selected={fromISODate(date)}
-              onSelect={(d) => d && setDate(toISODate(d))}
+              onSelect={(d) => {
+                if (!d) return;
+                setDate(toISODate(d));
+                setOpen(false);
+              }}
               classNames={{
-                month_caption: `${defaultClassNames.month_caption} text-popover-foreground font-normal`,
+                month_caption: `${defaultClassNames.month_caption} text-black font-normal`,
                 weekday: `${defaultClassNames.weekday} text-black font-bold`,
-                chevron: `${defaultClassNames.chevron} fill-popover-foreground hover:fill-primary`,
+                chevron: `${defaultClassNames.chevron} fill-black hover:fill-primary`,
                 selected: `${defaultClassNames.selected} [&>button]:bg-primary [&>button]:text-popover`,
               }}
             />
