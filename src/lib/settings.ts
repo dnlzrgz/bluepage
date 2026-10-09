@@ -6,35 +6,24 @@ export type Theme = (typeof THEMES)[number];
 
 interface Settings {
   theme: Theme;
-  font: string | null; // null = system font
 }
 
-const DEFAULTS: Settings = { theme: "blue", font: null };
+const DEFAULTS: Settings = { theme: "blue" };
 const store = new LazyStore("settings.json");
 
 export const useSettings = create<Settings>(() => DEFAULTS);
 
-function applySettings({ theme, font }: Settings) {
+function applySettings({ theme }: Settings) {
   const root = document.documentElement;
   root.dataset.theme = theme;
-
-  if (font) {
-    root.style.setProperty("--app-font", JSON.stringify(font));
-  } else {
-    root.style.removeProperty("--app-font");
-  }
 }
 
 export async function initSettings() {
   try {
-    const [theme, font] = await Promise.all([
-      store.get<Theme>("theme"),
-      store.get<string | null>("font"),
-    ]);
+    const theme = await store.get<Theme>("theme");
 
     useSettings.setState({
       theme: theme && THEMES.includes(theme) ? theme : DEFAULTS.theme,
-      font: font ?? DEFAULTS.font,
     });
   } catch (error) {
     console.error("Failed to load settings", error);

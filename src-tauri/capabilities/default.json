@@ -8,7 +8,6 @@
     "core:window:allow-destroy",
     "opener:default",
     "store:default",
-    "system-fonts:default",
     "window-state:default"
   ]
 }
