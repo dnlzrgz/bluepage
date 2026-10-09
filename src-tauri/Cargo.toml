@@ -1,13 +1,12 @@
 [package]
 name = "bluepage"
-version = "0.2.6"
-description = "A journal application"
+version = "0.3.0"
+description = "A bluish journal application"
 authors = ["dnlzrgz <contact@dnlzrgz.com>"]
 repository = "https://github.com/dnlzrgz/bluepage"
 edition = "2021"
 license = "MIT"
 readme = "README.md"
-
 publish = false
 
 [lib]

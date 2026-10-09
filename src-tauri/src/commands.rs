@@ -41,6 +41,15 @@ pub async fn upsert_entry(
     plain_text: String,
     pool: State<'_, SqlitePool>,
 ) -> Result<(), String> {
+    if plain_text.trim().is_empty() {
+        sqlx::query("DELETE FROM entries WHERE date = ?")
+            .bind(date)
+            .execute(&*pool)
+            .await
+            .map_err(|e| e.to_string())?;
+        return Ok(());
+    }
+
     sqlx::query(
         "INSERT INTO entries (date, content, plain_text)
          VALUES (?, ?, ?)
