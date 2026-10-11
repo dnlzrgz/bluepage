@@ -1,7 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "bluepage",
-  "version": "../package.json",
   "identifier": "com.daniel.bluepage",
   "build": {
     "beforeDevCommand": "npm run dev",
@@ -35,9 +34,10 @@
     "publisher": "dnlzrgz",
     "homepage": "https://github.com/dnlzrgz/bluepage",
     "copyright": "Copyright © 2026 dnlzrgz",
+    "license": "MIT",
     "category": "Productivity",
     "shortDescription": "A minimal journal application",
-    "longDescription": "A minimal, simple, and bluish journal application.",
+    "longDescription": "A minimal, simple, and bluish personal journal application.",
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
