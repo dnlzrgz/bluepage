@@ -3,6 +3,7 @@ mod db;
 mod models;
 
 use tauri::Manager;
+use tauri_plugin_window_state::StateFlags;
 
 pub fn run() {
     tauri::Builder::default()
@@ -14,7 +15,11 @@ pub fn run() {
             }
         }))
         .plugin(tauri_plugin_store::Builder::new().build())
-        .plugin(tauri_plugin_window_state::Builder::new().build())
+        .plugin(
+            tauri_plugin_window_state::Builder::new()
+                .with_state_flags(StateFlags::all() & !StateFlags::VISIBLE)
+                .build(),
+        )
         .plugin(tauri_plugin_opener::init())
         .setup(|app| {
             let app_data_dir = app.path().app_data_dir()?;
