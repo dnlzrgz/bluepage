@@ -17,13 +17,7 @@ const EDITOR_PROPS = {
   attributes: {
     spellcheck: "true",
     lang: navigator.language,
-    class: [
-      "prose prose-lg",
-      "mx-auto w-full max-w-255",
-      "px-6 pt-12 mt-6 pb-[50dvh]",
-      "antialiased hyphens-auto wrap-break-word",
-      "bg-background focus:outline-none",
-    ].join(" "),
+    class: "entry",
   },
   scrollThreshold: { top: 0, bottom: 200, left: 0, right: 0 },
   scrollMargin: { top: 0, bottom: 200, left: 0, right: 0 },

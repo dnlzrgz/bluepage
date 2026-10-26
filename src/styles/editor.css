@@ -1,0 +1,168 @@
+/* Replacement for @tailwindcss/typography's `prose` */
+
+@layer components {
+  .entry {
+    margin-inline: auto;
+    margin-block-start: var(--space-12);
+    inline-size: 100%;
+    max-inline-size: var(--width-entry);
+    padding-block-start: var(--space-24);
+    padding-block-end: var(--entry-tail);
+    padding-inline: var(--space-12);
+    background-color: var(--background);
+    color: var(--foreground);
+    font-size: var(--entry-font-size);
+    line-height: var(--entry-line-height);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    overflow-wrap: break-word;
+  }
+
+  .entry:focus {
+    outline: none;
+  }
+
+  .entry > :first-child {
+    margin-block-start: 0;
+  }
+
+  .entry > :last-child {
+    margin-block-end: 0;
+  }
+
+  .entry p {
+    margin-block: 1.33333em; /* 24/18 */
+  }
+
+  .entry strong {
+    color: var(--foreground);
+    font-weight: 600;
+  }
+
+  .entry code {
+    color: var(--foreground);
+    font-size: 0.888889em; /* 16/18 */
+    font-weight: 600;
+  }
+
+  /* The plugin wraps the inline code in backticks. Kept for parity. */
+  .entry code::before,
+  .entry code::after {
+    content: "`";
+  }
+
+  .entry h2 code {
+    font-size: 0.866667em; /* 26/30 */
+  }
+
+  .entry h3 code {
+    font-size: 0.875em; /* 21/24 */
+  }
+
+  .entry h1 {
+    margin-block: 0 0.833333em; /* 40/48 */
+    font-size: 2.66667em; /* 48/18 */
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .entry h2 {
+    margin-block: 1.86667em 1.06667em; /* 56/30, 32/30 */
+    font-size: 1.66667em; /* 30/18 */
+    font-weight: 700;
+    line-height: 1.33333; /* 40/30 */
+  }
+
+  .entry h3 {
+    margin-block: 1.66667em 0.666667em; /* 40/24, 16/24 */
+    font-size: 1.33333em; /* 24/18 */
+    font-weight: 600;
+    line-height: 1.5; /* 36/24 */
+  }
+
+  .entry h4 {
+    margin-block: 1.77778em 0.444444em; /* 32/18, 8/18 */
+    font-weight: 600;
+    line-height: 1.55556; /* 28/18 */
+  }
+
+  .entry h2 + *,
+  .entry h3 + *,
+  .entry h4 + * {
+    margin-block-start: 0;
+  }
+
+  .entry ul,
+  .entry ol {
+    margin-block: 1.33333em; /* 24/18 */
+    padding-inline-start: 1.55556em; /* 28/18 */
+  }
+
+  .entry ul {
+    list-style-type: disc;
+  }
+
+  .entry ol {
+    list-style-type: decimal;
+  }
+
+  .entry li {
+    margin-block: 0.666667em; /* 12/18 */
+  }
+
+  .entry ul > li,
+  .entry ol > li {
+    padding-inline-start: 0.444444em; /* 8/18 */
+  }
+
+  .entry ul > li::marker {
+    color: var(--foreground);
+  }
+
+  .entry ol > li::marker {
+    color: var(--foreground);
+    font-weight: 400;
+  }
+
+  .entry ul > li p,
+  .entry ol > li p {
+    margin-block: 0.888889em; /* 16/18 */
+  }
+
+  .entry ul > li > p:first-child,
+  .entry ol > li > p:first-child {
+    margin-block-start: 1.33333em;
+  }
+
+  .entry ul > li > p:last-child,
+  .entry ol > li > p:last-child {
+    margin-block-end: 1.33333em;
+  }
+
+  .entry ul ul,
+  .entry ul ol,
+  .entry ol ul,
+  .entry ol ol {
+    margin-block: 0.888889em; /* 16/18 */
+  }
+
+  .entry blockquote {
+    margin-block: 1.66667em; /* 40/24 */
+    padding-inline-start: 1em;
+    border-inline-start: 0.25rem solid var(--foreground);
+    color: var(--foreground);
+    font-style: italic;
+    font-weight: 500;
+    quotes: "\201C" "\201D" "\2018" "\2019";
+  }
+
+  .entry blockquote p:first-of-type::before {
+    content: open-quote;
+  }
+
+  .entry blockquote p:last-of-type::after {
+    content: close-quote;
+  }
+}

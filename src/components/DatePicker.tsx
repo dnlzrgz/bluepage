@@ -8,7 +8,7 @@ import {
   useJournalStore,
 } from "@/stores/journal";
 import { Popover } from "@base-ui/react/popover";
-import { DayPicker, getDefaultClassNames } from "@daypicker/react";
+import { DayPicker } from "@daypicker/react";
 import { useEffect, useState } from "react";
 
 export function DatePicker() {
@@ -32,15 +32,13 @@ export function DatePicker() {
     };
   }, [open, month]);
 
-  const defaultClassNames = getDefaultClassNames();
-
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
-      <Popover.Trigger className="cursor-pointer text-lg text-foreground">{date}</Popover.Trigger>
+      <Popover.Trigger className="date-trigger">{date}</Popover.Trigger>
 
       <Popover.Portal>
-        <Popover.Positioner sideOffset={6} className="z-40">
-          <Popover.Popup className="rounded-xl bg-popover p-3 shadow-xl">
+        <Popover.Positioner sideOffset={6} className="popover-positioner">
+          <Popover.Popup className="surface date-picker-popup">
             <DayPicker
               mode="single"
               navLayout="around"
@@ -50,21 +48,11 @@ export function DatePicker() {
               modifiers={{
                 written: (d) => entryDates.has(toISODate(d)),
               }}
-              modifiersClassNames={{
-                written:
-                  "[&>button]:relative [&>button]:after:absolute [&>button]:after:bottom-0.5 [&>button]:after:left-1/2 [&>button]:after:size-1.25 [&>button]:after:-translate-x-1/2 [&>button]:after:rounded-full [&>button]:after:bg-primary aria-selected:[&>button]:after:bg-popover",
-              }}
+              modifiersClassNames={{ written: "rdp-written" }}
               selected={fromISODate(date)}
               onSelect={(d) => {
                 if (!d) return;
                 setDate(toISODate(d));
-                setOpen(false);
-              }}
-              classNames={{
-                month_caption: `${defaultClassNames.month_caption} text-black font-normal`,
-                weekday: `${defaultClassNames.weekday} text-black font-bold`,
-                chevron: `${defaultClassNames.chevron} fill-black hover:fill-primary`,
-                selected: `${defaultClassNames.selected} [&>button]:bg-primary [&>button]:text-popover`,
               }}
             />
           </Popover.Popup>

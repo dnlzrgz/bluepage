@@ -1,0 +1,196 @@
+@layer components {
+  .surface {
+    border-radius: var(--radius-md);
+    background-color: var(--popover);
+    box-shadow: var(--shadow-surface);
+  }
+
+  .icon {
+    block-size: var(--size-icon);
+    inline-size: auto;
+    fill: currentColor;
+  }
+
+  .icon--square {
+    inline-size: var(--size-icon);
+  }
+
+  .popover-positioner {
+    z-index: var(--z-popover);
+  }
+
+  .icon-button {
+    cursor: pointer;
+    color: var(--foreground);
+  }
+
+  .settings-popover {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+    inline-size: var(--width-popover-sm);
+    padding-block: var(--space-12);
+    padding-inline: var(--space-7);
+  }
+
+  .theme-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-5);
+  }
+
+  .theme-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--size-icon);
+    block-size: var(--size-icon);
+    border-radius: var(--radius-full);
+    background-color: var(--primary);
+    cursor: pointer;
+    box-shadow: 0 0 0 0 transparent;
+    transition-property: scale, box-shadow;
+    transition-duration: var(--duration-fast);
+    transition-timing-function: var(--ease);
+  }
+
+  .theme-option:hover {
+    scale: 1.1;
+  }
+
+  .theme-option:active {
+    scale: 0.95;
+  }
+
+  .theme-option:focus-visible {
+    outline: var(--ring) solid var(--primary);
+    outline-offset: var(--ring);
+  }
+
+  .theme-option[data-checked] {
+    box-shadow:
+      0 0 0 var(--ring) var(--popover),
+      0 0 0 calc(var(--ring) * 2) var(--primary);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .theme-option {
+      transition: none;
+    }
+  }
+
+  .status-dot {
+    display: block;
+    inline-size: var(--size-dot);
+    block-size: var(--size-dot);
+    border-radius: var(--radius-full);
+    background-color: var(--foreground);
+    transition-property: background-color;
+    transition-duration: var(--duration-fast);
+    transition-timing-function: var(--default-timing);
+  }
+
+  .status-dot--error {
+    background-color: var(--error);
+  }
+
+  .status-dot--busy {
+    animation: pulse 2s var(--default-timing) infinite;
+  }
+
+  .status-popup {
+    inline-size: var(--width-popover-md);
+    padding: var(--space-12);
+    color: var(--popover-foreground);
+  }
+
+  .status-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    max-block-size: 24rem;
+    overflow-y: auto;
+  }
+
+  .status-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+  }
+
+  .status-message {
+    color: var(--surface-foreground);
+    overflow-wrap: break-word;
+  }
+
+  .status-dismiss {
+    flex-shrink: 0;
+    cursor: pointer;
+    padding-block: var(--space-3);
+    padding-inline: var(--space-5);
+    color: var(--surface-foreground);
+  }
+
+  /* DayPicker's own accent variable. */
+  .rdp-root {
+    --rdp-accent-color: var(--primary);
+  }
+
+  .date-trigger {
+    cursor: pointer;
+    font-size: var(--text-lg);
+    line-height: var(--leading-lg);
+    color: var(--foreground);
+  }
+
+  .date-picker-popup {
+    padding: var(--space-6);
+  }
+
+  .date-picker-popup .rdp-month_caption {
+    color: var(--surface-foreground);
+    font-weight: 400;
+  }
+
+  .date-picker-popup .rdp-weekday {
+    color: var(--surface-foreground);
+    font-weight: 700;
+  }
+
+  .date-picker-popup .rdp-chevron {
+    fill: var(--surface-foreground);
+  }
+
+  .date-picker-popup .rdp-chevron:hover {
+    fill: var(--primary);
+  }
+
+  .date-picker-popup .rdp-selected .rdp-day_button {
+    background-color: var(--primary);
+    color: var(--popover);
+  }
+
+  /* The "has an entry" dot under a day. */
+  .date-picker-popup .rdp-written .rdp-day_button {
+    position: relative;
+  }
+
+  .date-picker-popup .rdp-written .rdp-day_button::after {
+    content: "";
+    position: absolute;
+    bottom: var(--space-1);
+    left: 50%;
+    translate: -50% 0;
+    inline-size: var(--size-marker);
+    block-size: var(--size-marker);
+    border-radius: var(--radius-full);
+    background-color: var(--primary);
+  }
+
+  .date-picker-popup .rdp-written[aria-selected="true"] .rdp-day_button::after,
+  .date-picker-popup .rdp-written.rdp-selected .rdp-day_button::after {
+    background-color: var(--popover);
+  }
+}

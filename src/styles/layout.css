@@ -1,0 +1,28 @@
+/* Page-level blocks */
+
+@layer layout {
+  .toolbar {
+    position: fixed;
+    inset-inline: 0;
+    top: 0;
+    z-index: var(--z-toolbar);
+    display: grid;
+    grid-template-columns: var(--size-icon) 1fr var(--size-icon);
+    place-items: center;
+    width: 100%;
+    padding-block: var(--space-6);
+    padding-inline: var(--space-12);
+    background-color: var(--background);
+  }
+
+  .noise {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-noise);
+    pointer-events: none;
+    opacity: var(--noise-opacity);
+    mix-blend-mode: overlay;
+    background-image: var(--noise-image);
+    background-size: var(--noise-tile);
+  }
+}

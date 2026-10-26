@@ -1,0 +1,78 @@
+/* Theme colors */
+
+@property --primary {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --background {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --popover {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --popover-foreground {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@layer tokens {
+  :root,
+  [data-theme="blue"] {
+    --primary: #2e759e;
+    --background: var(--primary);
+    --foreground: #fffffe;
+    --popover: var(--foreground);
+    --popover-foreground: var(--primary);
+  }
+
+  :root {
+    --surface-foreground: #000;
+
+    transition:
+      --primary var(--duration-fast) var(--ease),
+      --background var(--duration-fast) var(--ease),
+      --foreground var(--duration-fast) var(--ease),
+      --popover var(--duration-fast) var(--ease),
+      --popover-foreground var(--duration-fast) var(--ease);
+  }
+
+  [data-theme="forest"] {
+    --primary: #004643;
+  }
+
+  [data-theme="plum"] {
+    --primary: #6246ea;
+  }
+
+  [data-theme="clay"] {
+    --primary: #55423d;
+  }
+
+  [data-theme="paper"] {
+    --primary: #0d0d0d;
+    --background: #fffffe;
+    --foreground: var(--primary);
+    --popover: var(--background);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    transition: none;
+  }
+}

@@ -11,12 +11,10 @@ export function StatusIndicator() {
 
   return (
     <Popover.Root open={errorOpen && hasError} onOpenChange={setErrorOpen}>
-      <Popover.Trigger aria-label="Status" className="cursor-pointer">
+      <Popover.Trigger aria-label="Status" className="icon-button">
         <span
           aria-hidden
-          className={`block size-3 rounded-full transition-colors ${
-            hasError ? "bg-error" : "bg-foreground"
-          } ${busy && !hasError ? "animate-pulse" : ""}`}
+          className={`status-dot${hasError ? " status-dot--error" : ""}${busy && !hasError ? " status-dot--busy" : ""}`}
         />
       </Popover.Trigger>
 
@@ -25,23 +23,19 @@ export function StatusIndicator() {
       </span>
 
       <Popover.Portal>
-        <Popover.Positioner align="start" sideOffset={6} className="z-40">
-          <Popover.Popup className="w-96 rounded-xl bg-popover p-6 text-popover-foreground shadow-xl">
-            <ul className="flex max-h-96 flex-col gap-3 overflow-y-auto">
+        <Popover.Positioner align="start" sideOffset={6} className="popover-positioner">
+          <Popover.Popup className="surface status-popup">
+            <ul className="status-list">
               {errors.map((message, i) => (
-                <li key={message} className="flex items-center justify-between gap-2.5">
-                  <span className="wrap-break-word text-black">{message}</span>
+                <li key={message} className="status-item">
+                  <span className="status-message">{message}</span>
                   <button
                     type="button"
                     aria-label={`Dismiss error: ${message}`}
                     onClick={() => dismissError(i)}
-                    className="shrink-0 cursor-pointer px-2.5 py-1.5"
+                    className="status-dismiss"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 256 256"
-                      className="h-5 w-auto fill-black"
-                    >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" className="icon">
                       <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
                     </svg>
                   </button>

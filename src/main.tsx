@@ -4,11 +4,11 @@ import ReactDOM from "react-dom/client";
 import { isTauri } from "@tauri-apps/api/core";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
-import "./App.css";
+import "./styles/index.css";
 import App from "./App";
 import { initSettings } from "./lib/settings";
 
-async function revealMainWindow() {
+async function showMainWindow() {
   if (!isTauri()) return;
 
   try {
@@ -17,7 +17,7 @@ async function revealMainWindow() {
     await main.setFocus();
     await (await WebviewWindow.getByLabel("splashscreen"))?.close();
   } catch (error) {
-    console.error("Failed to reveal main window", error);
+    console.error("Failed to show main window", error);
   }
 }
 
@@ -40,7 +40,7 @@ async function boot() {
     const remaining = MIN_SPLASH_MS - (performance.now() - startedAt);
     if (remaining > 0) await new Promise((r) => setTimeout(r, remaining));
 
-    await revealMainWindow();
+    await showMainWindow();
   }
 }
 

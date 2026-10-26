@@ -1,0 +1,11 @@
+/* Layer order is declared explicitly to not depends on module import order */
+@layer tokens, base, layout, components, utilities;
+
+@import "@daypicker/react/style.css" layer(components);
+
+@import "./tokens.css";
+@import "./theme.css";
+@import "./base.css";
+@import "./layout.css";
+@import "./components.css";
+@import "./editor.css";

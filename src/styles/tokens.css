@@ -1,0 +1,51 @@
+/* Design tokens */
+
+@layer tokens {
+  :root {
+    --space-1: 0.125rem; /*  2px */
+    --space-3: 0.375rem; /*  6px */
+    --space-5: 0.625rem; /* 10px */
+    --space-6: 0.75rem; /* 12px */
+    --space-7: 0.875rem; /* 14px */
+    --space-12: 1.5rem; /* 24px */
+    --space-24: 3rem; /* 48px */
+
+    --radius-md: 0.75rem;
+    --radius-full: 9999px;
+    --ring: 2px;
+    --shadow-surface: 0 20px 25px -5px #0000001a, 0 8px 10px -6px #0000001a;
+
+    --app-font: ui-sans-serif, system-ui, sans-serif;
+    --font-mono:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+      monospace;
+    --text-lg: 1.125rem;
+    --leading-lg: calc(1.75 / 1.125);
+
+    --duration-fast: 150ms;
+    --default-timing: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease: cubic-bezier(0.66, 0, 0.34, 1);
+
+    --z-toolbar: 40;
+    --z-popover: 40;
+    --z-noise: 50;
+
+    --size-icon: 1.25rem; /* 20px */
+    --size-dot: 0.75rem; /* 12px */
+    --size-marker: 0.3125rem; /*  5px */
+    --width-popover-sm: 18rem; /* 288px */
+    --width-popover-md: 24rem; /* 384px */
+    --width-entry: 63.75rem; /* 1020px */
+
+    --entry-font-size: 1.125rem;
+    --entry-line-height: 1.7778; /* prose-lg: 32/18 */
+    --entry-tail: 50dvh;
+
+    --error: red;
+    --success: green;
+
+    --noise-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)'/%3E%3C/svg%3E");
+    --noise-tile: 182px;
+    --noise-opacity: 0.25;
+  }
+}
