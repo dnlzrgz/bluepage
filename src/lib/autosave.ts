@@ -11,7 +11,7 @@ interface AutosaverOptions<T> {
 export function createAutosaver<T>({
   snapshot,
   write,
-  wait = 800,
+  wait = 500,
   maxWait = 5000,
 }: AutosaverOptions<T>) {
   let tail: Promise<void> = Promise.resolve();
