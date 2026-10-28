@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct Entry {
     pub id: i64,
     pub date: NaiveDate,
-    pub content: String,
+    pub content: String, // Markdown
     pub plain_text: String,
     pub created_at: NaiveDateTime,
     pub updated_at: NaiveDateTime,

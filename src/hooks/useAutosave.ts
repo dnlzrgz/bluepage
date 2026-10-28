@@ -10,7 +10,7 @@ export function useAutosave(editor: Editor | null, isoDate: string) {
 
     const saver = createAutosaver({
       snapshot: () => ({
-        content: JSON.stringify(editor.getJSON()),
+        content: editor.getMarkdown(),
         text: editor.getText(),
       }),
       write: ({ content, text }) => upsertEntry(isoDate, content, text),

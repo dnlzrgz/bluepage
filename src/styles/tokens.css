@@ -29,6 +29,7 @@
     --z-toolbar: 40;
     --z-popover: 40;
     --z-noise: 50;
+    --z-toast: 70;
 
     --size-icon: 1.25rem; /* 20px */
     --size-dot: 0.75rem; /* 12px */
@@ -42,7 +43,6 @@
     --entry-tail: 50dvh;
 
     --error: red;
-    --success: green;
 
     --noise-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)'/%3E%3C/svg%3E");
     --noise-tile: 182px;

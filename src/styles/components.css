@@ -27,7 +27,7 @@
   .settings-popover {
     display: flex;
     flex-direction: column;
-    gap: var(--space-12);
+    gap: var(--space-7);
     inline-size: var(--width-popover-sm);
     padding-block: var(--space-12);
     padding-inline: var(--space-7);
@@ -86,46 +86,50 @@
     block-size: var(--size-dot);
     border-radius: var(--radius-full);
     background-color: var(--foreground);
-    transition-property: background-color;
+    opacity: 0;
+    transition-property: background-color, opacity;
     transition-duration: var(--duration-fast);
     transition-timing-function: var(--default-timing);
   }
 
   .status-dot--error {
     background-color: var(--error);
+    opacity: 1;
   }
 
-  .status-dot--busy {
+  .status-dot--slow {
+    opacity: 1;
     animation: pulse 2s var(--default-timing) infinite;
   }
 
-  .status-popup {
-    inline-size: var(--width-popover-md);
-    padding: var(--space-12);
-    color: var(--popover-foreground);
-  }
-
-  .status-list {
+  .notifications {
+    position: fixed;
+    inset-block-end: var(--space-7);
+    inset-inline-end: var(--space-7);
+    z-index: var(--z-toast);
     display: flex;
     flex-direction: column;
-    gap: var(--space-6);
-    max-block-size: 24rem;
-    overflow-y: auto;
+    gap: var(--space-5);
+    inline-size: var(--width-popover-md);
+    /* An empty stack must never intercept clicks on the page. */
+    pointer-events: none;
   }
 
-  .status-item {
+  .notification {
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: space-between;
     gap: var(--space-5);
+    padding: var(--space-7);
+    pointer-events: auto;
   }
 
-  .status-message {
+  .notification-message {
     color: var(--surface-foreground);
     overflow-wrap: break-word;
   }
 
-  .status-dismiss {
+  .notification-close {
     flex-shrink: 0;
     cursor: pointer;
     padding-block: var(--space-3);

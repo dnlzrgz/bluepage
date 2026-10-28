@@ -7,6 +7,7 @@ import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 import "./styles/index.css";
 import App from "./App";
 import { initSettings } from "./lib/settings";
+import { ensureMarkdownStorage } from "./lib/markdown";
 
 async function showMainWindow() {
   if (!isTauri()) return;
@@ -42,6 +43,9 @@ async function boot() {
 
     await showMainWindow();
   }
+
+  // After the window: the first render stays one settings read.
+  void ensureMarkdownStorage();
 }
 
 void boot();

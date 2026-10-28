@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import type { Editor } from "@tiptap/react";
 import { getEntry } from "@/lib/db";
+import { entryDoc } from "@/lib/markdown";
 import { track } from "@/stores/status";
 
 export function useLoadEntry(editor: Editor | null, isoDate: string): void {
@@ -15,9 +16,7 @@ export function useLoadEntry(editor: Editor | null, isoDate: string): void {
 
         editor
           .chain()
-          .setContent(entry?.content ? JSON.parse(entry.content) : "", {
-            emitUpdate: false,
-          })
+          .setContent(entryDoc(entry?.content ?? ""), { emitUpdate: false })
           .setMeta("addToHistory", false)
           .run();
 

@@ -1,8 +1,28 @@
 use chrono::NaiveDate;
+use serde::Serialize;
 use sqlx::SqlitePool;
 use tauri::State;
 
 use crate::models::Entry;
+
+/// Row still holding TipTap's JSON instead of markdown.
+#[derive(Debug, Serialize, sqlx::FromRow)]
+pub struct LegacyEntry {
+    pub date: NaiveDate,
+    pub content: String,
+    pub plain_text: String,
+}
+
+/// Temporary: added so in the frontend we can convert pre-markdown rows once.
+#[tauri::command]
+pub async fn read_legacy_entries(pool: State<'_, SqlitePool>) -> Result<Vec<LegacyEntry>, String> {
+    sqlx::query_as(
+        "SELECT date, content, plain_text FROM entries WHERE content LIKE '{\"type\":\"doc\"%'",
+    )
+    .fetch_all(&*pool)
+    .await
+    .map_err(|e| e.to_string())
+}
 
 #[tauri::command]
 pub async fn get_entry(

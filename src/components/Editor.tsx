@@ -1,17 +1,8 @@
 import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
+import { EXTENSIONS } from "@/lib/markdown";
 import { useEffectiveDate } from "@/stores/journal";
 import { useLoadEntry } from "@/hooks/useLoadEntry";
 import { useAutosave } from "@/hooks/useAutosave";
-
-const EXTENSIONS = [
-  StarterKit.configure({
-    codeBlock: false,
-    horizontalRule: false,
-    dropcursor: false,
-    gapcursor: false,
-  }),
-];
 
 const EDITOR_PROPS = {
   attributes: {

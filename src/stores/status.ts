@@ -1,18 +1,25 @@
 import { create } from "zustand";
 
+export interface Notice {
+  id: number;
+  message: string;
+}
+
 interface StatusState {
+  /** Operations past `SLOW_MS` that have not finished yet. */
   pending: number;
-  errors: string[];
-  errorOpen: boolean;
+  notices: Notice[];
 }
 
 export const useStatusStore = create<StatusState>(() => ({
   pending: 0,
-  errors: [],
-  errorOpen: false,
+  notices: [],
 }));
 
-const SHOW_DELAY_MS = 150;
+/** Anything faster than this is a keystroke, not a wait. */
+const SLOW_MS = 1000;
+
+let nextId = 0;
 
 function errorMessage(error: unknown): string {
   if (error instanceof Error) return error.message;
@@ -22,45 +29,44 @@ function errorMessage(error: unknown): string {
     if (typeof message === "string") return message;
     try {
       return JSON.stringify(error);
-    } catch {}
+    } catch (unsendable) {
+      // Circular structure: report why, then fall back to String().
+      console.error("Failed to describe error", unsendable);
+    }
   }
 
   return String(error);
 }
 
 async function trackPending<T>(op: Promise<T>): Promise<T> {
-  let shown = false;
+  let counted = false;
   const timer = window.setTimeout(() => {
-    shown = true;
+    counted = true;
     useStatusStore.setState((s) => ({ pending: s.pending + 1 }));
-  }, SHOW_DELAY_MS);
+  }, SLOW_MS);
 
   return op.finally(() => {
     window.clearTimeout(timer);
-    if (shown) {
-      useStatusStore.setState((s) => ({ pending: Math.max(0, s.pending - 1) }));
-    }
+    if (!counted) return;
+    useStatusStore.setState((s) => ({ pending: Math.max(0, s.pending - 1) }));
   });
 }
 
 export async function track<T>(op: Promise<T>): Promise<T> {
   return trackPending(op).catch((error) => {
     const message = errorMessage(error);
-    useStatusStore.setState((s) => ({
-      errors: s.errors.includes(message) ? s.errors : [...s.errors, message],
-      errorOpen: true,
-    }));
+    useStatusStore.setState((s) =>
+      s.notices.some((notice) => notice.message === message)
+        ? s
+        : { notices: [...s.notices, { id: nextId++, message }] },
+    );
 
     throw error;
   });
 }
 
-export function dismissError(idx: number) {
+export function dismissNotice(id: number) {
   useStatusStore.setState((s) => ({
-    errors: s.errors.filter((_, i) => i !== idx),
+    notices: s.notices.filter((notice) => notice.id !== id),
   }));
-}
-
-export function setErrorOpen(errorOpen: boolean) {
-  useStatusStore.setState({ errorOpen });
 }

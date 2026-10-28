@@ -39,6 +39,7 @@ pub fn run() {
             commands::get_entry,
             commands::get_entry_dates,
             commands::upsert_entry,
+            commands::read_legacy_entries,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
